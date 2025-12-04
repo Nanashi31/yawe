@@ -1,68 +1,134 @@
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_URL=http://localhost
-
-APP_LOCALE=en
-APP_FALLBACK_LOCALE=en
-APP_FAKER_LOCALE=en_US
-
-APP_MAINTENANCE_DRIVER=file
-# APP_MAINTENANCE_STORE=database
-
-# PHP_CLI_SERVER_WORKERS=4
-
-BCRYPT_ROUNDS=12
-
-LOG_CHANNEL=stack
-LOG_STACK=single
-LOG_DEPRECATIONS_CHANNEL=null
-LOG_LEVEL=debug
-
-DB_CONNECTION=mysql
-DB_HOST=172.18.0.2
-DB_PORT=3306
-DB_DATABASE=foryou_db
-DB_USERNAME=sail
-DB_PASSWORD=password
-
-SESSION_DRIVER=database
-SESSION_LIFETIME=120
-SESSION_ENCRYPT=false
-SESSION_PATH=/
-SESSION_DOMAIN=.localhost
-SESSION_SAME_SITE=none
-
-SANCTUM_STATEFUL_DOMAINS=localhost:4200
-
-BROADCAST_CONNECTION=log
-FILESYSTEM_DISK=local
-QUEUE_CONNECTION=database
-
-CACHE_STORE=database
-# CACHE_PREFIX=
-
-MEMCACHED_HOST=127.0.0.1
-
-REDIS_CLIENT=phpredis
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_MAILER=log
-MAIL_SCHEME=null
-MAIL_HOST=127.0.0.1
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="hello@example.com"
-MAIL_FROM_NAME="${APP_NAME}"
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
-AWS_USE_PATH_STYLE_ENDPOINT=false
-
-VITE_APP_NAME="${APP_NAME}"
+Angular is running in development mode.
+debug_node.mjs:18274 Angular hydrated 2 component(s) and 55 node(s), 0 component(s) were skipped. Learn more at https://angular.dev/guide/hydration.
+new-request.ts:81 --- Checking form validity ---
+new-request.ts:82 Form valid? true
+new-request.ts:83 Form values: {details: {…}, appointment: {…}}
+new-request.ts:88 --- FormGroup: details ---
+new-request.ts:91 Control: details.projectName, Status: VALID, Value: asa
+new-request.ts:91 Control: details.projectType, Status: VALID, Value: Puerta
+new-request.ts:91 Control: details.description, Status: VALID, Value: asasa
+new-request.ts:91 Control: details.dimensions, Status: VALID, Value: asas
+new-request.ts:91 Control: details.estimatedBudget, Status: VALID, Value: 1212
+new-request.ts:88 --- FormGroup: appointment ---
+new-request.ts:91 Control: appointment.date, Status: VALID, Value: {day: 'lun', date: 9, available: true}
+new-request.ts:91 Control: appointment.time, Status: VALID, Value: null
+new-request.ts:94 --- End of validity check ---
+requests.js:1  POST http://localhost/api/solicitudes 419 (unknown status)
+_$initInterceptor.s.fetch @ requests.js:1
+(anonymous) @ module.mjs:1749
+(anonymous) @ module.mjs:1783
+runOutsideAngular @ debug_node.mjs:7936
+doRequest @ module.mjs:1783
+(anonymous) @ module.mjs:1755
+Observable2._trySubscribe @ Observable.js:38
+(anonymous) @ Observable.js:32
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ finalize.js:5
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ finalize.js:5
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+doInnerSub @ mergeInternals.js:19
+outerNext @ mergeInternals.js:14
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+(anonymous) @ innerFrom.js:51
+Observable2._trySubscribe @ Observable.js:38
+(anonymous) @ Observable.js:32
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+mergeInternals @ mergeInternals.js:53
+(anonymous) @ mergeMap.js:14
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ filter.js:6
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ map.js:6
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ switchMap.js:14
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+(anonymous) @ tap.js:18
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+(anonymous) @ map.js:7
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+(anonymous) @ filter.js:6
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+(anonymous) @ mergeInternals.js:25
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+doRequest @ module.mjs:1908
+await in doRequest
+(anonymous) @ module.mjs:1755
+Observable2._trySubscribe @ Observable.js:38
+(anonymous) @ Observable.js:32
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ finalize.js:5
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ finalize.js:5
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+doInnerSub @ mergeInternals.js:19
+outerNext @ mergeInternals.js:14
+OperatorSubscriber2._this._next @ OperatorSubscriber.js:15
+Subscriber2.next @ Subscriber.js:34
+(anonymous) @ innerFrom.js:51
+Observable2._trySubscribe @ Observable.js:38
+(anonymous) @ Observable.js:32
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+mergeInternals @ mergeInternals.js:53
+(anonymous) @ mergeMap.js:14
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ filter.js:6
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ map.js:6
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ tap.js:15
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+(anonymous) @ switchMap.js:10
+(anonymous) @ lift.js:10
+(anonymous) @ Observable.js:27
+errorContext @ errorContext.js:19
+Observable2.subscribe @ Observable.js:23
+submitRequest @ new-request.ts:114
+NewRequestComponent_button_29_Template_button_click_0_listener @ new-request.html:129
+executeListenerWithErrorHandling @ debug_node.mjs:14112
+wrapListenerIn_markDirtyAndPreventDefault @ debug_node.mjs:14095
+(anonymous) @ dom_renderer.mjs:746Understand this error
+new-request.ts:120 Error creating request: HttpErrorResponse {headers: _HttpHeaders, status: 419, statusText: 'unknown status', url: 'http://localhost/api/solicitudes', ok: false, …}

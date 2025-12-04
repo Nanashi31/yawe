@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RequestService } from '../../services/request.service'; // Import RequestService
+import { AuthService } from '../../services/auth.service'; // Import AuthService
 
 @Component({
   selector: 'app-new-request',
@@ -29,7 +29,7 @@ export class NewRequestComponent {
   constructor(
     private fb: FormBuilder, 
     private router: Router,
-    private requestService: RequestService // Inject RequestService
+    private authService: AuthService // Inject AuthService
   ) {
     this.requestForm = this.fb.group({
       details: this.fb.group({
@@ -77,6 +77,23 @@ export class NewRequestComponent {
   }
 
   submitRequest(): void {
+    // --- Start of new diagnostic code ---
+    console.log('--- Checking form validity ---');
+    console.log('Form valid?', this.requestForm.valid);
+    console.log('Form values:', this.requestForm.value);
+
+    // Log individual control status
+    Object.keys(this.requestForm.controls).forEach(groupKey => {
+      const formGroup = this.requestForm.get(groupKey) as FormGroup;
+      console.log(`--- FormGroup: ${groupKey} ---`);
+      Object.keys(formGroup.controls).forEach(controlKey => {
+        const control = formGroup.get(controlKey);
+        console.log(`Control: ${groupKey}.${controlKey}, Status: ${control?.status}, Value:`, control?.value);
+      });
+    });
+    console.log('--- End of validity check ---');
+    // --- End of new diagnostic code ---
+
     if (this.requestForm.valid) {
       // Prepare data for the backend
       const details = this.detailsForm.value;
@@ -85,7 +102,7 @@ export class NewRequestComponent {
       const payload = {
         tipo_proyecto: details.projectType,
         descripcion: details.description,
-        // The backend needs to know which user is making the request. 
+        // The backend needs to know which user is making the request.
         // This is handled automatically by the auth:sanctum middleware.
         // We might need to adjust the backend controller to associate the request with the user.
         fecha_cita: appointment.date ? `${appointment.date.date}/12/2025` : null, // Example date formatting
@@ -94,7 +111,7 @@ export class NewRequestComponent {
         direccion: 'Placeholder Address'
       };
 
-      this.requestService.createRequest(payload).subscribe({
+      this.authService.createRequest(payload).subscribe({
         next: (response) => {
           console.log('Request created successfully!', response);
           this.router.navigate(['/home']);

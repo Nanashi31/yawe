@@ -102,6 +102,22 @@ export class AuthService {
     );
   }
 
+  createRequest(requestData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.ensureCsrfCookie().pipe(
+      switchMap(() =>
+        this.http.post(`${this.apiUrl}/solicitudes`, requestData, {
+          headers,
+          withCredentials: true
+        })
+      )
+    );
+  }
+
   getCurrentUser(): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/user`, {
       withCredentials: true
