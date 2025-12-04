@@ -26,7 +26,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8000';
+  private baseUrl = 'http://localhost';
   private apiUrl = `${this.baseUrl}/api`;
   
   // Estado de autenticación
@@ -78,7 +78,7 @@ export class AuthService {
 
     return this.ensureCsrfCookie().pipe(
       switchMap(() =>
-        this.http.post(`${this.apiUrl}/register`, data, {
+        this.http.post(`${this.baseUrl}/register`, data, {
           headers,
           withCredentials: true
         })

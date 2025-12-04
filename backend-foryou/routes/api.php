@@ -12,10 +12,6 @@ use App\Http\Controllers\Api\DetalleSolicitudController;
 use App\Http\Controllers\Api\ProyectoController;
 use App\Http\Controllers\Api\PagoController; // Import the controller
 
-use App\Http\Controllers\Auth\RegisteredUserController;
-
-Route::post('/register', [RegisteredUserController::class, 'store']);
-
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
