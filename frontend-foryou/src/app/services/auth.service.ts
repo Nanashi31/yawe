@@ -78,7 +78,7 @@ export class AuthService {
 
     return this.ensureCsrfCookie().pipe(
       switchMap(() =>
-        this.http.post(`${this.baseUrl}/register`, data, {
+        this.http.post(`${this.apiUrl}/register`, data, {
           headers,
           withCredentials: true
         })
