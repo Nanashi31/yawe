@@ -130,10 +130,6 @@ export class AuthService {
   private csrfInitialized = false;
 
   private ensureCsrfCookie(): Observable<void> {
-    if (this.csrfInitialized) {
-      return of(void 0);
-    }
-
     return this.http
       .get<void>(`${this.baseUrl}/sanctum/csrf-cookie`, {
         withCredentials: true

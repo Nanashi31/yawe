@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   onNavigateToCreateRequest(): void {
-    console.log('Navigate to create request');
+    this.router.navigate(['/nueva-solicitud']);
   }
 
   onNavigateToProjects(): void {

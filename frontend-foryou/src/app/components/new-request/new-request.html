@@ -1,0 +1,135 @@
+<div class="container my-5">
+  <div class="mx-auto" style="max-width: 600px;">
+    <!-- Header -->
+    <div class="d-flex align-items-center mb-4">
+      <button (click)="previousStep()" class="btn btn-light me-3">
+        <i class="bi" [ngClass]="currentStep === 1 ? 'bi-x-lg' : 'bi-arrow-left'"></i>
+      </button>
+      <h2 class="h4 mb-0">Nueva Solicitud</h2>
+    </div>
+
+    <!-- Stepper -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <div class="d-flex align-items-center" [class.text-primary]="currentStep >= 1">
+        <div class="rounded-circle d-flex align-items-center justify-content-center" [ngClass]="currentStep >= 1 ? 'bg-primary text-white' : 'bg-light'" style="width: 2rem; height: 2rem;">1</div>
+      </div>
+      <div class="flex-grow-1 mx-2">
+        <div class="progress" style="height: 2px;">
+          <div class="progress-bar" role="progressbar" [style.width.%]="currentStep > 1 ? 100 : 0" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center" [class.text-primary]="currentStep >= 2">
+        <div class="rounded-circle d-flex align-items-center justify-content-center" [ngClass]="currentStep >= 2 ? 'bg-primary text-white' : 'bg-light'" style="width: 2rem; height: 2rem;">2</div>
+      </div>
+      <div class="flex-grow-1 mx-2">
+        <div class="progress" style="height: 2px;">
+          <div class="progress-bar" role="progressbar" [style.width.%]="currentStep > 2 ? 100 : 0" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center" [class.text-primary]="currentStep >= 3">
+        <div class="rounded-circle d-flex align-items-center justify-content-center" [ngClass]="currentStep >= 3 ? 'bg-primary text-white' : 'bg-light'" style="width: 2rem; height: 2rem;">3</div>
+      </div>
+    </div>
+
+    <!-- Form Content -->
+    <div [ngSwitch]="currentStep" [formGroup]="requestForm">
+
+      <!-- ==================== STEP 1: Project Details ==================== -->
+      <div *ngSwitchCase="1" formGroupName="details">
+        <h3 class="h5 mb-3">Detalles del Proyecto</h3>
+        <p class="text-muted mb-4">Cuéntanos sobre tu proyecto.</p>
+        
+        <div class="mb-3">
+          <label for="projectName" class="form-label">Nombre del Proyecto</label>
+          <input type="text" id="projectName" class="form-control" formControlName="projectName" placeholder="Ej: Puerta Principal">
+        </div>
+        
+        <div class="mb-4">
+            <label class="form-label">Tipo de Proyecto</label>
+            <div class="row row-cols-2 g-2">
+                <div class="col" *ngFor="let type of projectTypes">
+                    <button type="button" class="btn btn-outline-secondary w-100" 
+                            [class.active]="detailsForm.get('projectType')?.value === type"
+                            (click)="selectProjectType(type)">
+                        {{ type }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea id="description" class="form-control" formControlName="description" rows="3" placeholder="Describe los detalles de tu proyecto..."></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label for="dimensions" class="form-label">Dimensiones (opcional)</label>
+            <input type="text" id="dimensions" class="form-control" formControlName="dimensions" placeholder="Ej: 2m x 1.5m">
+        </div>
+
+        <div class="mb-3">
+            <label for="estimatedBudget" class="form-label">Presupuesto Estimado (opcional)</label>
+            <input type="number" id="estimatedBudget" class="form-control" formControlName="estimatedBudget" placeholder="$0.00">
+        </div>
+
+      </div>
+
+      <!-- ==================== STEP 2: Schedule Appointment ==================== -->
+      <div *ngSwitchCase="2" formGroupName="appointment">
+        <h3 class="h5 mb-3">Agendar Cita</h3>
+        <p class="text-muted mb-4">Elige fecha y hora para la visita.</p>
+        
+        <div class="row row-cols-2 g-3">
+          <div class="col" *ngFor="let date of availableDates">
+            <button type="button" class="btn w-100 p-3" 
+                    [ngClass]="appointmentForm.get('date')?.value?.date === date.date ? 'btn-primary' : 'btn-outline-secondary'"
+                    [disabled]="!date.available"
+                    (click)="selectDate(date)">
+              <div class="text-capitalize">{{ date.day }}</div>
+              <div class="h5">{{ date.date }} dic</div>
+              <div *ngIf="!date.available" class="small text-danger">No disponible</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 3: Review ==================== -->
+      <div *ngSwitchCase="3">
+        <h3 class="h5 mb-3">Revisar Solicitud</h3>
+        <p class="text-muted mb-4">Verifica que todo está correcto.</p>
+
+        <div class="card bg-light border-0 mb-4">
+          <div class="card-body">
+            <h4 class="h6">Detalles del Proyecto</h4>
+            <p class="mb-1"><strong class="me-2">Nombre:</strong> {{ detailsForm.get('projectName')?.value }}</p>
+            <p class="mb-1"><strong class="me-2">Tipo:</strong> {{ detailsForm.get('projectType')?.value }}</p>
+            <p class="mb-0"><strong class="me-2">Descripción:</strong> {{ detailsForm.get('description')?.value || 'No especificado' }}</p>
+          </div>
+        </div>
+
+        <div class="card bg-light border-0">
+          <div class="card-body">
+            <h4 class="h6">Cita Programada</h4>
+            <p class="mb-1" *ngIf="appointmentForm.get('date')?.value">
+              <strong class="me-2">Fecha:</strong> 
+              {{ appointmentForm.get('date')?.value.day }}, {{ appointmentForm.get('date')?.value.date }} de diciembre
+            </p>
+            <p class="mb-0 text-muted" *ngIf="!appointmentForm.get('date')?.value">No se ha seleccionado una fecha.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="mt-5">
+      <button *ngIf="currentStep < 3" (click)="nextStep()" class="btn btn-primary w-100" [disabled]="(currentStep === 1 && detailsForm.invalid) || (currentStep === 2 && appointmentForm.invalid)">
+        Continuar <i class="bi bi-arrow-right"></i>
+      </button>
+      <button *ngIf="currentStep === 3" (click)="submitRequest()" class="btn btn-success w-100">
+        <i class="bi bi-check-lg"></i> Enviar Solicitud
+      </button>
+    </div>
+
+  </div>
+</div>

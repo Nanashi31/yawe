@@ -23,6 +23,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'nueva-solicitud',
+    loadComponent: () => import('./components/new-request/new-request').then(m => m.NewRequestComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: '**',
     redirectTo: '/login'
   }

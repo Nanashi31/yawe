@@ -59,13 +59,14 @@ class SolicitudController extends Controller
             $validatedData = $request->validate([
                 'direccion' => 'required|string|max:255',
                 'descripcion' => 'nullable|string',
-                // 'fecha' is automatically set by the database using useCurrent()
-                'id_cliente' => 'nullable|uuid|exists:clientes,id_cliente',
                 'dias_disponibles' => 'nullable|string',
-                'fecha_cita' => 'nullable|date',
+                'fecha_cita' => 'nullable|string', // Allow string for flexible date format
                 'materiales' => 'nullable|string',
                 'tipo_proyecto' => 'nullable|string',
             ]);
+
+            // Add the authenticated user's ID to the data
+            $validatedData['id_cliente'] = $request->user()->id_cliente;
 
             $solicitud = Solicitud::create($validatedData);
             return response()->json($solicitud, 201); // 201 Created
