@@ -1,0 +1,109 @@
+<div class="login-container">
+  <div class="login-content">
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h1 class="app-title">ForYou</h1>
+      <p class="app-subtitle">Gestión de Proyectos de Herrería</p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="login-card">
+      <h2 class="card-title">Bienvenido</h2>
+      <p class="card-subtitle">Inicia sesión para continuar</p>
+
+      <!-- User Type Selection -->
+      <div class="user-type-selector mb-4">
+        <button
+          type="button"
+          [class.active]="userType === 'cliente'"
+          (click)="selectUserType('cliente')"
+          class="user-type-btn user-type-btn-left"
+        >
+          Cliente
+        </button>
+        <button
+          type="button"
+          [class.active]="userType === 'herrero'"
+          (click)="selectUserType('herrero')"
+          class="user-type-btn user-type-btn-right"
+        >
+          Herrero
+        </button>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <div class="input-icon">
+            <i class="bi bi-envelope"></i>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              [class.is-invalid]="email?.invalid && email?.touched"
+              placeholder="ejemplo@correo.com"
+            />
+          </div>
+          <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback d-block">
+            <span *ngIf="email?.errors?.['required']">El correo electrónico es requerido</span>
+            <span *ngIf="email?.errors?.['email']">Ingresa un correo electrónico válido</span>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-icon">
+            <i class="bi bi-lock"></i>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              [class.is-invalid]="password?.invalid && password?.touched"
+              placeholder="********"
+            />
+          </div>
+          <div *ngIf="password?.invalid && password?.touched" class="invalid-feedback d-block">
+            <span *ngIf="password?.errors?.['required']">La contraseña es requerida</span>
+            <span *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres</span>
+          </div>
+        </div>
+
+        <!-- Forgot Password Link -->
+        <div class="text-end mb-4">
+          <a href="#" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn btn-primary btn-submit w-100"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">Iniciar Sesión</span>
+          <span *ngIf="isLoading">
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Iniciando sesión...
+          </span>
+        </button>
+      </form>
+
+      <!-- Registration Link -->
+      <div class="text-center mt-4">
+        <p class="register-link-text">
+          ¿No tienes cuenta? <a routerLink="/register" class="register-link">Regístrate aquí</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
