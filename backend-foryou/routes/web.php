@@ -39,7 +39,3 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
-//laravel/sanctum
-Route::get('/sanctum/csrf-cookie', function (Request $request) {
-    return response()->json(['message' => 'CSRF cookie set']);
-})->middleware('web')->name('sanctum.csrf-cookie');
